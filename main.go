@@ -2,9 +2,10 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
-	"log"
-	"net/http"
+    "fmt"
+    "log"
+    "net/http"
+    "os"
 )
 
 func main() {
@@ -20,6 +21,10 @@ func main() {
 		})
 	})
 
-	fmt.Println("API iniciada en http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	port := os.Getenv("PORT")
+	if port == "" {
+    port = "8080"
+    }
+	
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
